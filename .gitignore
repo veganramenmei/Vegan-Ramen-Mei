@@ -1,2 +1,4 @@
 Cursor-darwin-arm64.dmg
 Cursor-darwin-arm64.dmg
+*.dmg
+.DS_Store
