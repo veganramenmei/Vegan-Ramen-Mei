@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+  
 
 :root {
     /* Retro Kawaii Color Palette */
@@ -72,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: var(--transition);
     box-shadow: 0 4px 20px rgba(255, 182, 193, 0.3);
     color: var(--kawaii-blue-dark);
+    font-size: 0.9rem;
 }
 
 .header.scrolled {
@@ -84,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -177,6 +179,7 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
 }
+
 .btn-secondary {
     background: var(--kawaii-pink);
     color: var(--white);
@@ -251,6 +254,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     background: var(--kawaii-blue);
     overflow: hidden;
+    width: 100%;
 }
 
 .hero-background {
@@ -429,22 +433,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .locations-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;    
-    padding: 1rem 0;
-}
-
-.location-card-large {
-    flex: 0 0 280px;
+    display: flex;                 /* grid ではなく flex に変更 */
+    justify-content: center;       /* カードを中央寄せ */
+    align-items: stretch;
+    gap: 1rem;
+    flex-wrap: nowrap;             /* 折り返しを禁止 */
+    max-width: 100%;               /* 横幅いっぱい使う */
+    overflow-x: clip;           /* 横スクロールを防ぐ */
+  }
+  
+  /* 各カード */
+  .location-card-large {
+    flex: 1;                       /* 各カードが均等に幅を取る */
+    min-width: 0;                  /* はみ出し防止 */
     background: var(--kawaii-dark-pink);
     border-radius: 20px;
-    overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     transition: var(--transition);
-}
+  }
+  
+  /* 画像の縦横比を維持して小さく */
+  .location-image-large {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 20px 20px 0 0;
+  }
 
 .location-card-large:hover {
     background: var(--kawaii-pink);
@@ -463,10 +477,15 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+.locations-row::-webkit-scrollbar {
+    display: none;
+}
+
 .location-name {
-    font-size: 1.3rem;
+    font-size: 2.0rem;
     color: var(--text-dark);
     margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     font-family: var(--font-primary);
     font-weight: normal;
     letter-spacing: 0.3px;
@@ -475,7 +494,7 @@ h1, h2, h3, h4, h5, h6 {
 .location-address {
     color: var(--text-dark);
     font-family: var(--font-poppins);
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     letter-spacing: 0.2px;
     font-weight: 80;
     margin-bottom: 1rem;
@@ -485,9 +504,10 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-dark);
     font-family: var(--font-poppins);
     margin-bottom: 0.3rem;
-    font-size: 0.7rem;
+    font-size: 1rem;
     letter-spacing: 0.2px;
     font-weight: 80;
+    text-transform: none;
 }
 
 .location-close {
@@ -497,6 +517,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.7rem;
     letter-spacing: 0.2px;
     font-weight: 80;
+    text-transform: none;
 }
 /* Strengths Section */
 .strengths {
@@ -518,7 +539,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 20px; /* ← 全角を丸くする */
     overflow: hidden; /* ← 子要素（画像）にも丸みを反映 */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: var(--kawaii-dark-pink);
 }
 
 .strength-card-large img {
@@ -533,6 +554,7 @@ h1, h2, h3, h4, h5, h6 {
   .strength-card-large:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+    background: var(--kawaii-dark-pink);
   }
   
   .strength-image-large {
@@ -560,7 +582,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   .strength-title {
-    font-size: 1.3rem;
+    font-size: 1.0rem;
     margin: 0.3rem 0.5rem 0.5rem; /* 上下の余白をぐっと詰める */
     color: var(--text-dark);
     font-family: var(--font-primary);
@@ -841,8 +863,9 @@ h1, h2, h3, h4, h5, h6 {
     
     .nav-list {
         flex-direction: column;
-        gap: 1rem;
-        width: 100%;
+        gap: 0.2rem;
+        width: 20%;
+        font-size: 0.2rem;
     }
     
     .nav-cta {
@@ -921,11 +944,10 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 480px) {
     .container {
         padding: 0 1rem;
+        width: 100%;
     }
     
-    .nav-container {
-        padding: 1rem;
-    }
+
     
     .nav-logo-img {
         height: 45px;
@@ -939,6 +961,10 @@ h1, h2, h3, h4, h5, h6 {
         height: 120px;
     }
     
+    .about-text {
+        font-size: 0.6rem;
+    }
+
     .hero-catch {
         font-size: 0.8rem;
     }
@@ -952,7 +978,10 @@ h1, h2, h3, h4, h5, h6 {
         margin: 0 1rem;
     }
     .locations-row {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-wrap: nowrap;             /* 折り返しを禁止 */
+        max-width: 100%;               /* 横幅いっぱい使う */
+        overflow-x: hidden;
     }
     
     .footer-logo-img {
@@ -979,3 +1008,184 @@ textarea:focus {
     outline-offset: 2px;
 }
 
+@media (max-width: 480px) {
+
+    /* 全体コンテナ */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+        text-align: center;
+        overflow-x: visible; /* 横スクロール防止 */
+    }
+
+    /* ヘッダー */
+    header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-logo-img {
+        height: 45px;
+        margin-right: 1rem; 
+    }
+
+    /* ナビゲーションリスト */
+    .nav-list,
+    .nav-list li,
+    .nav-list li a {
+        font-size: 0.4rem; /* 確実に反映 */
+        margin: 0;
+        padding: 0;
+        flex-direction: row;
+        gap: 0.6rem;
+        justify-content:space-between;
+    }
+
+    /* Uber Eatsボタン */
+    .btn-primary {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        font-size: 12px;
+        padding: 0.4rem 0.8rem;
+        min-width: 80px;
+        z-index: 10;
+    }
+
+    /* ヒーローセクション */
+    .hero {
+        height: 80vh;
+    }
+
+    .hero-logo-img {
+        height: 120px;
+    }
+
+    .hero-catch {
+        font-size: 0.8rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* セクションタイトル */
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    /* Strengthカード */
+    .strengths-grid {
+        display: flex;              /* 横並び */
+        justify-content: space-between; /* 均等配置 */
+        flex-wrap: nowrap;          /* 折り返さない */
+        gap: 0.5rem;                /* カード間隔 */
+        width: 100%;                /* 親幅100% */
+        overflow-x: hidden;         /* 横スクロール禁止 */
+        padding: 0 0.5rem;          /* 少し余白 */
+        box-sizing: border-box;
+    }
+
+    /* 各カード */
+    .strength-card-large {
+        flex: 0 0 calc(33.33% - 0.33rem); /* 3枚横並び */
+        max-width: calc(33.33% - 0.33rem);
+        border-radius: 20px;
+        margin: 0;
+        padding: 0.3rem;
+        font-size: 0.65rem;
+        text-align: center;
+    }
+
+    /* 画像 */
+    .strength-card-large img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 20px 20px 0 0;
+        display: block;
+    }
+
+    /* タイトル・テキスト */
+    .strength-card-large h3 {
+        font-size: 0.6rem;
+        margin: 0.2rem 0 0.1rem;
+    }
+
+    .strength-card-large p {
+        font-size: 0.55rem;
+        line-height: 1.1;
+    }
+}
+
+    /* ロケーションカード */
+    .locations-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        overflow-x: visible; /* 横スクロール防止 */
+    }
+
+    .location-card-large {
+        flex: 0 0 calc(25% - 0.375rem); /* 4枚横並び */
+        max-width: calc(25% - 0.375rem);
+        border-radius: 20px;
+        margin: 0;
+        padding: 0;
+        font-size: 0.65rem;
+    }
+
+    .location-card-large h3 {
+        font-size: 0.6rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .location-card-large p {
+        font-size: 0.55rem;
+        line-height: 1.1;
+    }
+
+    .location-image-large {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        border-radius: 20px 20px 0 0;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .location-info-minimal {
+        padding: 0.4rem;
+    }
+
+    .location-name {
+        font-size: 0.6rem;
+    }
+
+    .location-address,
+    .location-hours,
+    .location-close {
+        font-size: 0.15rem; /* 小さく統一 */
+    }
+
+    .location-card-large:hover {
+        background: var(--kawaii-pink);
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    /* フッター */
+    .footer-logo-img {
+        height: 40px;
+    }
+
+}
